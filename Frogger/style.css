@@ -1,0 +1,39 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+  gap: 2px;
+}
+
+.grid div {
+  width: 30px;
+  height: 30px;
+}
+
+.starting-block {
+  background-color: white;
+}
+
+.ending-block {
+  background-color: white;
+}
+
+.frog {
+  background-color: green;
+}
+
+.road {
+  background-color: gray;
+}
+
+.car {
+  background-color: red;
+}
+
+.water {
+  background-color: blue;
+}
+
+.log {
+  background-color: brown;
+}
