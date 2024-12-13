@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors Game</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-        }
-        .highlight {
-            font-weight: bold;
-            color: green;
-        }
-        .score {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        transition: transform 0.2s ease;
+      }
+      button:active {
+        transform: scale(1.1);
+      }
+      .highlight {
+        font-weight: bold;
+        color: green;
+      }
+      .score {
+        margin-top: 20px;
+        font-size: 18px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Rock Paper Scissors Game</h1>
     <div>
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+      <button id="rock">Rock</button>
+      <button id="paper">Paper</button>
+      <button id="scissors">Scissors</button>
     </div>
     <div class="result">
-        <p id="player-choice">You chose: </p>
-        <p id="computer-choice">Computer chose: </p>
-        <p id="outcome">Result: </p>
+      <p id="player-choice">You chose:</p>
+      <p id="computer-choice">Computer chose:</p>
+      <p id="outcome">Result:</p>
     </div>
     <div class="score">
-        <p id="score">Player: 0 | Computer: 0</p>
+      <p id="score">Player: 0 | Computer: 0</p>
+      <p id="ties">Ties: 0</p>
     </div>
     <button id="reset">Reset Game</button>
+
+
+    <audio id="win-sound" src="./sounds/mixkit-achievement-bell-600.wav" preload="auto"></audio>
+    <audio id="lose-sound" src="./sounds/mixkit-losing-bleeps-2026.wav" preload="auto"></audio>
+    <audio id="tie-sound" src="./sounds/mixkit-correct-answer-tone-2870.wav" preload="auto"></audio>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

@@ -34,6 +34,10 @@ h2 {
   background-color: transparent;
 }
 
+.square.bonus-mole {
+  border: 2px solid gold;
+}
+
 #reset-btn {
   margin-top: 20px;
   padding: 10px 20px;

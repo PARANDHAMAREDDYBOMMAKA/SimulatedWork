@@ -7,8 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentTime = 60;
   let timerId = null;
   let countDownTimerId = null;
-
-  const moleImageLink =
+  let moleImageLink =
+    "https://raw.githubusercontent.com/Kalvium-Program/Image-files/refs/heads/main/mole.jpg";
+  let bonusMoleImageLink =
     "https://raw.githubusercontent.com/Kalvium-Program/Image-files/refs/heads/main/mole.jpg";
 
   function createBoard() {
@@ -19,26 +20,29 @@ document.addEventListener("DOMContentLoaded", function () {
       square.setAttribute("id", i);
       grid.appendChild(square);
     }
-    // console.log("Squares created:", grid);
   }
 
   function randomSquare() {
     const squares = document.querySelectorAll(".square");
 
     squares.forEach((square) => {
-      square.classList.remove("mole");
+      square.classList.remove("mole", "bonus-mole");
       square.style.backgroundImage = "";
     });
 
     let randomSquare = squares[Math.floor(Math.random() * 9)];
     randomSquare.classList.add("mole");
 
-    // console.log("Random square selected:", randomSquare);
-
-    randomSquare.style.backgroundImage = `url(${moleImageLink})`;
-    randomSquare.style.backgroundSize = "cover";
-
-    hitPosition = randomSquare.id;
+    if (Math.random() < 0.1) {
+      randomSquare.classList.add("bonus-mole");
+      randomSquare.style.backgroundImage = `url(${bonusMoleImageLink})`;
+      randomSquare.style.backgroundSize = "cover";
+      hitPosition = randomSquare.id;
+    } else {
+      randomSquare.style.backgroundImage = `url(${moleImageLink})`;
+      randomSquare.style.backgroundSize = "cover";
+      hitPosition = randomSquare.id;
+    }
   }
 
   function handleSquareClick() {
@@ -50,13 +54,18 @@ document.addEventListener("DOMContentLoaded", function () {
           result++;
           score.textContent = result;
           hitPosition = null;
+
+          if (result % 5 === 0) {
+            adjustDifficulty();
+          }
         }
       });
     });
   }
 
   function moveMole() {
-    timerId = setInterval(randomSquare, 700);
+    const randomTime = Math.floor(Math.random() * 500) + 500;
+    timerId = setInterval(randomSquare, randomTime);
   }
 
   function countDown() {
@@ -70,6 +79,12 @@ document.addEventListener("DOMContentLoaded", function () {
       resetBtn.style.display = "inline";
       alert("GAME OVER! Your final score is " + result);
     }
+  }
+
+  function adjustDifficulty() {
+    if (timerId) clearInterval(timerId);
+    const newInterval = Math.max(300, 700 - Math.floor(result / 2) * 50);
+    moveMole();
   }
 
   createBoard();

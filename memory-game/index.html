@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Game</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div>
-        <h1 id="head">Memory Game</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="game-container">
+      <h1 id="head">Memory Game</h1>
+
+      <div id="difficulty-selector">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+          <option value="easy">Easy (6 cards)</option>
+          <option value="medium">Medium (12 cards)</option>
+          <option value="hard">Hard (18 cards)</option>
+        </select>
+      </div>
+
+      <div id="game-stats">
+        <span>Score: <span id="result">0</span></span>
+        <span>Time: <span id="timer">00:00</span></span>
+        <span>Best Time: <span id="best-time">--:--</span></span>
+      </div>
+
+      <div id="game-board"></div>
+
+      <button id="reset-btn">Reset Game</button>
+
+      <div id="congrats-message" class="hidden">
+        Congratulations! You found all pairs!
+      </div>
     </div>
-  <div id="game-container">
-    <div id="game-board"></div>
-    <div id="result">Score: 0</div>
-    <button id="reset-btn" style="display: none;">Reset Game</button>
-    <div id="congrats-message" class="hidden">Congratulations! You found all pairs!</div>
-  </div>
-  <script src="script.js"></script>
-</body>
+
+    <script src="script.js"></script>
+  </body>
 </html>
