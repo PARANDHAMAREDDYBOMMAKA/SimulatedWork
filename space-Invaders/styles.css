@@ -1,48 +1,59 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: black;
-    color: white;
-    font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
 .game-container {
-    text-align: center;
+  text-align: center;
 }
 
 #grid {
-    display: grid;
-    grid-template-columns: repeat(15, 1fr);
-    width: 300px;
-    height: 300px;
-    background-color: #222;
-    border: 2px solid #fff;
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  width: 300px;
+  height: 300px;
+  background-color: #222;
+  border: 2px solid #fff;
 }
 
 #grid div {
-    border: 1px solid #333;
+  border: 1px solid #333;
 }
 
 .shooter {
-    background-color: green;
+  background-color: green;
 }
 
 .invader {
-    background-color: purple;
+  background-color: purple;
 }
 
 .laser {
-    background-color: orange;
+  background-color: orange;
 }
 
 .boom {
-    background-color: red;
+  background-color: red;
+}
+
+.boss {
+  background-color: yellow;
 }
 
 #result-display {
-    font-size: 24px;
-    margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
 }

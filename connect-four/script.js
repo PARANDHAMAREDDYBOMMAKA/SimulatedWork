@@ -2,10 +2,12 @@ const gameBoard = document.getElementById("game-board");
 const currentPlayerDisplay = document.getElementById("current-player");
 const resetButton = document.getElementById("reset-button");
 
-let currentPlayer = "player-one";
+let currentPlayer = "player";
 let squares = [];
 const width = 7;
 const height = 6;
+let timer;
+let timeLimit = 30000;
 
 function createBoard() {
   for (let i = 0; i < width * height; i++) {
@@ -15,6 +17,21 @@ function createBoard() {
     gameBoard.appendChild(square);
     squares.push(square);
   }
+}
+
+function startTimer() {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    currentPlayer = currentPlayer === "player" ? "ai" : "player";
+    currentPlayerDisplay.textContent = `Current Player: ${
+      currentPlayer === "player" ? "Player" : "AI"
+    }`;
+    if (currentPlayer === "ai") {
+      setTimeout(aiMove, 1000);
+    } else {
+      startTimer();
+    }
+  }, timeLimit);
 }
 
 function checkBoard() {
@@ -89,22 +106,22 @@ function checkBoard() {
   for (let combo of winningArrays) {
     const [a, b, c, d] = combo;
     if (
-      squares[a].classList.contains("player-one") &&
-      squares[b].classList.contains("player-one") &&
-      squares[c].classList.contains("player-one") &&
-      squares[d].classList.contains("player-one")
+      squares[a].classList.contains("player") &&
+      squares[b].classList.contains("player") &&
+      squares[c].classList.contains("player") &&
+      squares[d].classList.contains("player")
     ) {
-      alert("Player One Wins!");
+      alert("Player Wins!");
       resetGame();
       return;
     }
     if (
-      squares[a].classList.contains("player-two") &&
-      squares[b].classList.contains("player-two") &&
-      squares[c].classList.contains("player-two") &&
-      squares[d].classList.contains("player-two")
+      squares[a].classList.contains("ai") &&
+      squares[b].classList.contains("ai") &&
+      squares[c].classList.contains("ai") &&
+      squares[d].classList.contains("ai")
     ) {
-      alert("Player Two Wins!");
+      alert("AI Wins!");
       resetGame();
       return;
     }
@@ -112,8 +129,7 @@ function checkBoard() {
 
   const isBoardFull = squares.every(
     (square) =>
-      square.classList.contains("player-one") ||
-      square.classList.contains("player-two")
+      square.classList.contains("player") || square.classList.contains("ai")
   );
 
   if (isBoardFull) {
@@ -123,6 +139,8 @@ function checkBoard() {
 }
 
 function addPiece(event) {
+  if (currentPlayer === "ai") return;
+
   const clickedColumn = event.target.getAttribute("data-index") % width;
 
   for (let row = height - 1; row >= 0; row--) {
@@ -130,32 +148,81 @@ function addPiece(event) {
     const square = squares[index];
 
     if (
-      !square.classList.contains("player-one") &&
-      !square.classList.contains("player-two")
+      !square.classList.contains("player") &&
+      !square.classList.contains("ai")
     ) {
-      square.classList.add(currentPlayer);
+      square.classList.add("player");
+      animatePieceDrop(square);
 
       checkBoard();
 
-      currentPlayer =
-        currentPlayer === "player-one" ? "player-two" : "player-one";
-      currentPlayerDisplay.textContent = `Current Player: ${
-        currentPlayer === "player-one" ? "Player One" : "Player Two"
-      }`;
+      currentPlayer = "ai";
+      currentPlayerDisplay.textContent = "Current Player: AI";
 
+      setTimeout(aiMove, 1000);
       break;
     }
   }
 }
 
+function aiMove() {
+  const availableColumns = [];
+  for (let i = 0; i < width; i++) {
+    for (let row = height - 1; row >= 0; row--) {
+      const index = row * width + i;
+      const square = squares[index];
+      if (
+        !square.classList.contains("player") &&
+        !square.classList.contains("ai")
+      ) {
+        availableColumns.push(i);
+        break;
+      }
+    }
+  }
+
+  const randomColumn =
+    availableColumns[Math.floor(Math.random() * availableColumns.length)];
+  for (let row = height - 1; row >= 0; row--) {
+    const index = row * width + randomColumn;
+    const square = squares[index];
+
+    if (
+      !square.classList.contains("player") &&
+      !square.classList.contains("ai")
+    ) {
+      square.classList.add("ai");
+      animatePieceDrop(square);
+      checkBoard();
+      currentPlayer = "player";
+      currentPlayerDisplay.textContent = "Current Player: Player";
+      startTimer();
+      break;
+    }
+  }
+}
+
+function animatePieceDrop(square) {
+  square.style.transition = "transform 0.3s ease-in-out";
+  square.style.transform = "translateY(-100px)";
+  setTimeout(() => {
+    square.style.transform = "translateY(0)";
+  }, 100);
+}
+
 function resetGame() {
   squares.forEach((square) => {
-    square.classList.remove("player-one", "player-two");
+    square.classList.remove("player", "ai");
+    square.style.transition = "none";
+    square.style.transform = "none";
   });
-  currentPlayer = "player-one";
-  currentPlayerDisplay.textContent = "Current Player: Player One";
+  currentPlayer = "player";
+  currentPlayerDisplay.textContent = "Current Player: Player";
+  clearTimeout(timer);
+  startTimer();
 }
 
 createBoard();
 gameBoard.addEventListener("click", addPiece);
 resetButton.addEventListener("click", resetGame);
+startTimer();
