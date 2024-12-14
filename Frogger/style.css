@@ -1,39 +1,49 @@
 .grid {
-  display: grid;
-  grid-template-columns: repeat(10, 30px);
-  grid-template-rows: repeat(10, 30px);
-  gap: 2px;
+  border: 1px solid black;
+  height: 240px;
+  width: 240px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
 }
 
 .grid div {
-  width: 30px;
-  height: 30px;
-}
-
-.starting-block {
-  background-color: white;
+  height: 20px;
+  width: 20px;
 }
 
 .ending-block {
-  background-color: white;
+  background-color: red;
+}
+
+.starting-block {
+  background-color: blue;
+}
+
+.l1,
+.l2,
+.l3 {
+  background-color: brown;
+}
+
+.l4,
+.l5 {
+  background-color: lightblue;
+}
+
+.c1 {
+  background-color: black;
+}
+
+.c2,
+.c3 {
+  background-color: lightgrey;
 }
 
 .frog {
   background-color: green;
 }
 
-.road {
-  background-color: gray;
-}
-
-.car {
-  background-color: red;
-}
-
-.water {
-  background-color: blue;
-}
-
-.log {
-  background-color: brown;
+button {
+  margin: 10px;
 }

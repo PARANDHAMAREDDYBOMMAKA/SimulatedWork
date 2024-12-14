@@ -1,59 +1,51 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-}
-
-.game-board {
-  position: relative;
-  width: 600px;
-  height: 400px;
-  background-color: #eee;
-  border: 2px solid #333;
-  margin: 20px auto;
+.grid {
+  position: absolute;
+  width: 560px;
+  height: 300px;
+  border: solid 1px black;
+  margin-top: 100px;
+  background-color: #f0f0f0;
   overflow: hidden;
 }
 
-.score {
+.user {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 20px;
-  color: black;
+  width: 100px;
+  height: 20px;
+  background-color: rgb(48, 237, 180);
+  border-radius: 10px;
+}
+
+.block {
+  position: absolute;
+  width: 100px;
+  height: 20px;
+  background-color: rgb(44, 83, 35);
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 .ball {
   position: absolute;
   width: 20px;
   height: 20px;
-  background-color: red;
   border-radius: 50%;
+  background-color: rgb(183, 121, 49);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.paddle {
+.power-up {
   position: absolute;
-  width: 100px;
+  width: 20px;
   height: 20px;
-  background-color: blue;
-  bottom: 0;
-  left: 250px;
+  background-color: yellow;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.blocks-container {
-  position: absolute;
-  top: 30px;
-  left: 0;
-  width: 100%;
-}
-
-.block {
-  width: 60px;
-  height: 20px;
-  background-color: green;
-  margin: 5px;
-  display: inline-block;
+#score {
+  position: relative;
+  top: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
